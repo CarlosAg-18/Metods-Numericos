@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Decimal a Coma Flotante</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url("https://www.roc21.com/blog/wp-content/uploads/2012/09/fondos-para-pa%CC%81ginas-web-6.jpg");
+            overflow: hidden;
+        }
+        #input {
+            margin-bottom: 10px;
+        }
+
+        div{
+	      background-color: #E4FFFE;
+            margin: 18%;
+            padding: 10px;
+            border: 2px #D8FFFD;
+	      border-radius: 12px;
+        }
+
+    </style>
+</head>
+<body align="center"> 
+    
+    <div class="cajita"> 
+    <h1>Decimal a Coma Flotante de 32 bits</h1>
+    <input id="input" type="number" placeholder="Ingresa un número decimal"> <!-- Campo de entrada para el número decimal -->
+    <button onclick="convertir()">Convertir</button> <!-- Botón que llama a la función "convertir" cuando se hace clic en él -->
+    <p id="resultado"></p> <!-- Párrafo donde se mostrará el resultado -->
+    </div> 
+
+    <script> <!-- Inicio del script JavaScript -->
+        function convertir() { <!-- Definición de la función "convertir" -->
+            var input = document.getElementById('input').value; <!-- Obtiene el valor ingresado en el campo con id "input" -->
+
+            var float = parseFloat(input); <!-- Convierte el valor ingresado a un número flotante -->
+            var resultado = new Float32Array(1); <!-- Crea un arreglo para almacenar un número flotante de 32 bits -->
+            resultado[0] = float; <!-- Almacena el número flotante en el arreglo -->
+            var bytes = new Uint8Array(resultado.buffer); <!-- Crea un arreglo de bytes a partir del buffer del arreglo flotante -->
+            var binario = ''; <!-- Inicializa una cadena para almacenar la representación binaria del número flotante -->
+            for (var i = 0; i < bytes.length; i++) { <!-- Recorre cada byte en el arreglo de bytes -->
+                binario += bytes[i].toString(2).padStart(8, '0'); <!-- Convierte cada byte a binario y lo añade a la cadena "binario" -->
+            }
+            document.getElementById('resultado').innerHTML = 'Coma flotante de 32 bits: ' + binario; <!-- Muestra el resultado en el párrafo con id "resultado" -->
+        }
+    </script> 
+
+</body>
+</html>
